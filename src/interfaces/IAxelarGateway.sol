@@ -161,6 +161,8 @@ interface IAxelarGateway {
 
     function authModule() external view returns (address);
 
+    function governance() external view returns (address);
+
     function tokenDeployer() external view returns (address);
 
     function tokenMintLimit(string memory symbol) external view returns (uint256);
