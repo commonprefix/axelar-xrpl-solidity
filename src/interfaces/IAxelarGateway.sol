@@ -138,14 +138,6 @@ interface IAxelarGateway {
         bytes calldata payload
     ) external returns (bool);
 
-    function validateContractCallFromXRPL(
-        bytes32 commandId,
-        string calldata sourceChain,
-        string calldata sourceAddress,
-        bytes calldata payload,
-        address contractAddress
-    ) external returns (bool);
-
     function validateContractCallAndMint(
         bytes32 commandId,
         string calldata sourceChain,
