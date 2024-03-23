@@ -1,17 +1,17 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import { XRPLAxelarExecutable } from '../XRPLAxelarExecutable.sol';
-import { IXRPLAxelarGateway } from '../../interfaces/IXRPLAxelarGateway.sol';
+import { AxelarExecutable } from '../AxelarExecutable.sol';
+import { IAxelarGateway } from '../../interfaces/IAxelarGateway.sol';
 
-contract ExecutableSample is XRPLAxelarExecutable {
+contract ExecutableSample is AxelarExecutable {
     string public message;
     string public sourceChain;
     string public sourceAddress;
     string public tokenSymbol;
     uint256 public tokenAmount;
 
-    constructor(address gateway_) XRPLAxelarExecutable(gateway_) {
+    constructor(address gateway_) AxelarExecutable(gateway_) {
     }
 
     function _execute(
@@ -19,9 +19,9 @@ contract ExecutableSample is XRPLAxelarExecutable {
         string calldata sourceAddress_,
         bytes calldata payload_
     ) internal override {
-        bytes memory contractPayload;
-        (tokenSymbol, tokenAmount, contractPayload) = abi.decode(payload_, (string, uint256, bytes));
-        (message) = abi.decode(contractPayload, (string));
+        bytes memory gmpPayload;
+        (tokenSymbol, tokenAmount, gmpPayload) = abi.decode(payload_, (string, uint256, bytes));
+        (message) = abi.decode(gmpPayload, (string));
         sourceChain = sourceChain_;
         sourceAddress = sourceAddress_;
     }

@@ -2,13 +2,13 @@
 
 pragma solidity ^0.8.0;
 
-import { IXRPLAxelarGateway } from './IXRPLAxelarGateway.sol';
+import { IAxelarGateway } from './IAxelarGateway.sol';
 
-interface IXRPLAxelarExecutable {
+interface IAxelarExecutable {
     error InvalidAddress();
     error NotApprovedByGateway();
 
-    function gateway() external view returns (IXRPLAxelarGateway);
+    function gateway() external view returns (IAxelarGateway);
 
     function execute(
         bytes32 commandId,

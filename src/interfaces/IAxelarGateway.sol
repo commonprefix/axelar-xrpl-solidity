@@ -131,6 +131,13 @@ interface IAxelarGateway {
         bytes32 payloadHash
     ) external returns (bool);
 
+    function validateContractCall(
+        bytes32 commandId,
+        string calldata sourceChain,
+        string calldata sourceAddress,
+        bytes calldata payload
+    ) external returns (bool);
+
     function validateContractCallFromXRPL(
         bytes32 commandId,
         string calldata sourceChain,
@@ -196,9 +203,6 @@ interface IAxelarGateway {
 
     function execute(bytes calldata input) external;
 
-    // Can only be called by XRPLAxelarGateway
-    function burnTokenFrom(address sender, string memory symbol, uint256 amount) external;
-
-    // Can only be called by XRPLAxelarGateway
+    // Can only be called by governance
     function deployToken(bytes calldata params, bytes32) external;
 }

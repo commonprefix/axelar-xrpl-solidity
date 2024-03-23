@@ -2,16 +2,16 @@
 
 pragma solidity ^0.8.0;
 
-import { IXRPLAxelarGateway } from '../interfaces/IXRPLAxelarGateway.sol';
-import { IXRPLAxelarExecutable } from '../interfaces/IXRPLAxelarExecutable.sol';
+import { IAxelarGateway } from '../interfaces/IAxelarGateway.sol';
+import { IAxelarExecutable } from '../interfaces/IAxelarExecutable.sol';
 
-contract XRPLAxelarExecutable is IXRPLAxelarExecutable {
-    IXRPLAxelarGateway public immutable gateway;
+contract AxelarExecutable is IAxelarExecutable {
+    IAxelarGateway public immutable gateway;
 
     constructor(address gateway_) {
         if (gateway_ == address(0)) revert InvalidAddress();
 
-        gateway = IXRPLAxelarGateway(gateway_);
+        gateway = IAxelarGateway(gateway_);
     }
 
     function execute(
