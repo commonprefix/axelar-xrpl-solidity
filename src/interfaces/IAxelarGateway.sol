@@ -138,6 +138,15 @@ interface IAxelarGateway {
         bytes calldata payload
     ) external returns (bool);
 
+    function validateTokenTransfer(
+        bytes32 commandId,
+        string calldata sourceChain,
+        string calldata sourceAddress,
+        address destinationAddress,
+        string calldata denom,
+        uint256 amount
+    ) external returns (bool valid);
+
     function validateContractCallAndMint(
         bytes32 commandId,
         string calldata sourceChain,
@@ -160,6 +169,10 @@ interface IAxelarGateway {
     function tokenMintLimit(string memory symbol) external view returns (uint256);
 
     function tokenMintAmount(string memory symbol) external view returns (uint256);
+
+    function tokenDenom(string memory symbol) external view returns (string memory);
+
+    function tokenSymbol(string memory denom) external view returns (string memory);
 
     function allTokensFrozen() external view returns (bool);
 
