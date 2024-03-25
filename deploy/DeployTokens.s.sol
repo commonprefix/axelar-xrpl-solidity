@@ -19,12 +19,12 @@ contract DeployTokens is Script {
         vm.startBroadcast();
 
         IAxelarGateway(gateway).deployToken(
-            abi.encode("Wrapped Ether", "WETH", 18, 1e50, 0x7b79995e5f793A07Bc00c21412e50Ecae098E7f9, 1e50),
+            abi.encode("Wrapped Ether", "WETH", "uweth", 18, 1e50, 0x7b79995e5f793A07Bc00c21412e50Ecae098E7f9, 1e50),
             bytes32(0)
         );
 
         IAxelarGateway(gateway).deployToken(
-            abi.encode("Axelar Wrapped XRP", "axlXRP", 6, 1e50, address(0), 1e50),
+            abi.encode("Axelar Wrapped XRP", "axlXRP", "uxrp", 6, 1e50, address(0), 1e50),
             bytes32(0)
         );
 
