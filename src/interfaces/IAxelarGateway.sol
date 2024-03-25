@@ -39,16 +39,6 @@ interface IAxelarGateway {
         bytes payload
     );
 
-    event ContractCallWithToken(
-        address indexed sender,
-        string destinationChain,
-        string destinationContractAddress,
-        bytes32 indexed payloadHash,
-        bytes payload,
-        string symbol,
-        uint256 amount
-    );
-
     event Executed(bytes32 indexed commandId);
 
     event TokenDeployed(string symbol, address tokenAddresses);
@@ -59,18 +49,6 @@ interface IAxelarGateway {
         string sourceAddress,
         address indexed contractAddress,
         bytes32 indexed payloadHash,
-        bytes32 sourceTxHash,
-        uint256 sourceEventIndex
-    );
-
-    event ContractCallApprovedWithMint(
-        bytes32 indexed commandId,
-        string sourceChain,
-        string sourceAddress,
-        address indexed contractAddress,
-        bytes32 indexed payloadHash,
-        string symbol,
-        uint256 amount,
         bytes32 sourceTxHash,
         uint256 sourceEventIndex
     );
@@ -98,30 +76,12 @@ interface IAxelarGateway {
         bytes calldata payload
     ) external;
 
-    function callContractWithToken(
-        string calldata destinationChain,
-        string calldata contractAddress,
-        bytes calldata payload,
-        string calldata symbol,
-        uint256 amount
-    ) external;
-
     function isContractCallApproved(
         bytes32 commandId,
         string calldata sourceChain,
         string calldata sourceAddress,
         address contractAddress,
         bytes32 payloadHash
-    ) external view returns (bool);
-
-    function isContractCallAndMintApproved(
-        bytes32 commandId,
-        string calldata sourceChain,
-        string calldata sourceAddress,
-        address contractAddress,
-        bytes32 payloadHash,
-        string calldata symbol,
-        uint256 amount
     ) external view returns (bool);
 
     function validateContractCall(
@@ -146,15 +106,6 @@ interface IAxelarGateway {
         string calldata denom,
         uint256 amount
     ) external returns (bool valid);
-
-    function validateContractCallAndMint(
-        bytes32 commandId,
-        string calldata sourceChain,
-        string calldata sourceAddress,
-        bytes32 payloadHash,
-        string calldata symbol,
-        uint256 amount
-    ) external returns (bool);
 
     /***********\
     |* Getters *|
