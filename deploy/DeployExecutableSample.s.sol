@@ -6,15 +6,15 @@ import "../src/executable/examples/ExecutableSample.sol";
 
 contract DeployExecutableSample is Script {
     function run() public {
-        address gatewayAddress = vm.envAddress("XRPL_AXELAR_GATEWAY_ADDRESS");
+        address gateway = vm.envAddress("AXELAR_GATEWAY_ADDRESS");
 
-        if (gatewayAddress == address(0)) {
-            revert("XRPL_AXELAR_GATEWAY_ADDRESS must be set.");
+        if (gateway == address(0)) {
+            revert("AXELAR_GATEWAY_ADDRESS must be set.");
         }
 
         vm.startBroadcast();
 
-        ExecutableSample executableSample = new ExecutableSample(gatewayAddress);
+        ExecutableSample executableSample = new ExecutableSample(gateway);
         console.log("ExecutableSample deployed to:", address(executableSample));
 
         vm.stopBroadcast();
