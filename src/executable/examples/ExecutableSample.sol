@@ -5,11 +5,13 @@ import { AxelarExecutable } from '../AxelarExecutable.sol';
 import { IAxelarGateway } from '../../interfaces/IAxelarGateway.sol';
 
 contract ExecutableSample is AxelarExecutable {
-    string public message;
     string public sourceChain;
     string public sourceAddress;
-    string public tokenSymbol;
+    string public message;
+    string public tokenDenom;
     uint256 public tokenAmount;
+
+    event Executed(string _sourceChain, string _sourceAddress, string _message, string _tokenSymbol, uint256 _tokenAmount);
 
     constructor(address gateway_) AxelarExecutable(gateway_) {
     }
@@ -20,9 +22,11 @@ contract ExecutableSample is AxelarExecutable {
         bytes calldata payload_
     ) internal override {
         bytes memory gmpPayload;
-        (tokenSymbol, tokenAmount, gmpPayload) = abi.decode(payload_, (string, uint256, bytes));
+        (tokenDenom, tokenAmount, gmpPayload) = abi.decode(payload_, (string, uint256, bytes));
         (message) = abi.decode(gmpPayload, (string));
         sourceChain = sourceChain_;
         sourceAddress = sourceAddress_;
+
+        emit Executed(sourceChain, sourceAddress, message, IAxelarGateway(gateway).tokenSymbol(tokenDenom), tokenAmount);
     }
 }
